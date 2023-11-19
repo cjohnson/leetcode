@@ -4,8 +4,10 @@
 #ifndef INC_01_TWO_SUM_SOLUTION_H
 #define INC_01_TWO_SUM_SOLUTION_H
 
+#define SOLUTION_HASHMAP
+
 #include <cassert>
-#include <unordered_set>
+#include <unordered_map>
 #include <vector>
 
 using namespace std;
@@ -15,6 +17,7 @@ public:
     vector<int> twoSum(vector<int>& nums, int target);
 };
 
+#ifdef SOLUTION_NAIVE
 vector<int> Solution::twoSum(vector<int> &nums, int target) {
     // Assert leetcode constraints
     assert(2 <= nums.size() && nums.size() <= 10e4);
@@ -34,7 +37,30 @@ vector<int> Solution::twoSum(vector<int> &nums, int target) {
     // "You may assume that each input would have exactly one solution"
     assert(false);
 }
+#endif
 
+#ifdef SOLUTION_HASHMAP
+vector<int> Solution::twoSum(vector<int> &nums, int target) {
+    // Assert leetcode constraints
+    assert(2 <= nums.size() && nums.size() <= 10e4);
+#ifndef NDEBUG
+    for (int& num : nums) assert(-10e9 <= num && num <= 10e9);
+#endif
+    assert(-10e9 <= target && target <= 10e9);
+
+    // O(n) hashmap solution
+    unordered_map<int, size_t> map;
+    for (size_t i = 0; i < nums.size(); ++i) {
+        int& num = nums[i];
+        auto it = map.find(target - num);
+        if (it != map.end()) return { static_cast<int>(it->second), static_cast<int>(i) };
+        map[num] = i;
+    }
+
+    // "You may assume that each input would have exactly one solution"
+    assert(false);
+}
+#endif
 
 #endif //INC_01_TWO_SUM_SOLUTION_H
 
