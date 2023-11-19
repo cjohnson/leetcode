@@ -27,9 +27,12 @@ SOFTWARE.
 #define INC_01_TWO_SUM_SOLUTION_H
 
 //#define SOLUTION_NAIVE
-#define SOLUTION_HASHMAP
+#define SOLUTION_TWO_POINTER
+//#define SOLUTION_HASHMAP
 
 #include <cassert>
+
+#include <algorithm>
 #include <unordered_map>
 #include <vector>
 
@@ -75,6 +78,42 @@ vector<int> Solution::twoSum(vector<int> &nums, int target) {
 }
 
 #endif //SOLUTION_NAIVE
+
+#ifdef SOLUTION_TWO_POINTER
+
+vector<int> Solution::twoSum(vector<int> &nums, int target) {
+    // Assert leetcode constraints
+    assert(2 <= nums.size() && nums.size() <= 10e4);
+    assert(-10e9 <= target && target <= 10e9);
+
+    // O(nlogn) solution with two indices strategy
+    vector<pair<int, int>> index_table;
+    index_table.reserve(nums.size());
+    for (int i = 0; i < nums.size(); ++i) {
+        // Assert leetcode constraints
+        assert(-10e9 <= nums[i] && nums[i] <= 10e9);
+
+        index_table.emplace_back(nums[i], i);
+    }
+
+    sort(index_table.begin(), index_table.end());
+    int left = 0;
+    int right = static_cast<int>(nums.size()) - 1;
+    while (left < right) {
+        int sum = index_table[left].first + index_table[right].first;
+
+        if (sum == target)
+            return { index_table[left].second, index_table[right].second };
+
+        if (sum < target) ++left;
+        else --right;
+    }
+
+    // "You may assume that each input would have exactly one solution"
+    assert(false);
+}
+
+#endif // SOLUTION_TWO_POINTER
 
 #ifdef SOLUTION_HASHMAP
 
