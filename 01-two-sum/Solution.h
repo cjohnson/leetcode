@@ -27,8 +27,8 @@ SOFTWARE.
 #define INC_01_TWO_SUM_SOLUTION_H
 
 //#define SOLUTION_NAIVE
-#define SOLUTION_TWO_POINTER
-//#define SOLUTION_HASHMAP
+//#define SOLUTION_TWO_POINTER
+#define SOLUTION_HASHMAP
 
 #include <cassert>
 
