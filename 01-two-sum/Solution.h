@@ -62,6 +62,7 @@ vector<int> Solution::twoSum(vector<int> &nums, int target) {
     assert(-10e9 <= target && target <= 10e9);
 
     // O(n^2) naive solution - every possible pair is checked worst-case.
+    // Last empirical runtime: 1419ms
     for (int i = 0; i < nums.size(); ++i) {
         for (int j = 0; j < nums.size(); ++j) {
             // Assert leetcode constraints
@@ -87,6 +88,7 @@ vector<int> Solution::twoSum(vector<int> &nums, int target) {
     assert(-10e9 <= target && target <= 10e9);
 
     // O(nlogn) solution with two indices strategy
+    // Last empirical runtime: 8ms
     vector<pair<int, int>> index_table;
     index_table.reserve(nums.size());
     for (int i = 0; i < nums.size(); ++i) {
@@ -123,6 +125,7 @@ vector<int> Solution::twoSum(vector<int> &nums, int target) {
     assert(-10e9 <= target && target <= 10e9);
 
     // O(n) hashmap solution
+    // Last empirical runtime: 4ms
     unordered_map<int, int> map;
     for (int i = 0; i < nums.size(); ++i) {
         // Assert leetcode constraints
