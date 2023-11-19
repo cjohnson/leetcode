@@ -26,6 +26,7 @@ SOFTWARE.
 #ifndef INC_01_TWO_SUM_SOLUTION_H
 #define INC_01_TWO_SUM_SOLUTION_H
 
+//#define SOLUTION_NAIVE
 #define SOLUTION_HASHMAP
 
 #include <cassert>
@@ -70,7 +71,7 @@ vector<int> Solution::twoSum(vector<int> &nums, int target) {
     // "You may assume that each input would have exactly one solution"
     assert(false);
 }
-#endif
+#endif //SOLUTION_NAIVE
 
 #ifdef SOLUTION_HASHMAP
 vector<int> Solution::twoSum(vector<int> &nums, int target) {
@@ -93,7 +94,7 @@ vector<int> Solution::twoSum(vector<int> &nums, int target) {
     // "You may assume that each input would have exactly one solution"
     assert(false);
 }
-#endif
+#endif //SOLUTION_HASHMAP
 
 #endif //INC_01_TWO_SUM_SOLUTION_H
 
