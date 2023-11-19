@@ -56,14 +56,15 @@ public:
 vector<int> Solution::twoSum(vector<int> &nums, int target) {
     // Assert leetcode constraints
     assert(2 <= nums.size() && nums.size() <= 10e4);
-#ifndef NDEBUG
-    for (int& num : nums) assert(-10e9 <= num && num <= 10e9);
-#endif
     assert(-10e9 <= target && target <= 10e9);
 
-    // O(n^2) naive solution
+    // O(n^2) naive solution - every possible pair is checked worst-case.
     for (int i = 0; i < nums.size(); ++i) {
         for (int j = 0; j < nums.size(); ++j) {
+            // Assert leetcode constraints
+            assert(-10e9 <= nums[i] && nums[i] <= 10e9);
+            assert(-10e9 <= nums[j] && nums[j] <= 10e9);
+
             if (i == j) continue;
             if (nums[i] + nums[j] == target) return { i, j };
         }
@@ -80,14 +81,14 @@ vector<int> Solution::twoSum(vector<int> &nums, int target) {
 vector<int> Solution::twoSum(vector<int> &nums, int target) {
     // Assert leetcode constraints
     assert(2 <= nums.size() && nums.size() <= 10e4);
-#ifndef NDEBUG
-    for (int& num : nums) assert(-10e9 <= num && num <= 10e9);
-#endif
     assert(-10e9 <= target && target <= 10e9);
 
     // O(n) hashmap solution
     unordered_map<int, int> map;
     for (int i = 0; i < nums.size(); ++i) {
+        // Assert leetcode constraints
+        assert(-10e9 <= nums[i] && nums[i] <= 10e9);
+
         auto it = map.find(target - nums[i]);
         if (it != map.end())
             return { it->second, i };
