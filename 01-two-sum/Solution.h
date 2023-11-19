@@ -52,6 +52,7 @@ public:
 };
 
 #ifdef SOLUTION_NAIVE
+
 vector<int> Solution::twoSum(vector<int> &nums, int target) {
     // Assert leetcode constraints
     assert(2 <= nums.size() && nums.size() <= 10e4);
@@ -61,19 +62,21 @@ vector<int> Solution::twoSum(vector<int> &nums, int target) {
     assert(-10e9 <= target && target <= 10e9);
 
     // O(n^2) naive solution
-    for (size_t i = 0; i < nums.size(); ++i) {
-        for (size_t j = 0; j < nums.size(); ++j) {
+    for (int i = 0; i < nums.size(); ++i) {
+        for (int j = 0; j < nums.size(); ++j) {
             if (i == j) continue;
-            if (nums[i] + nums[j] == target) return { static_cast<int>(i), static_cast<int>(j) };
+            if (nums[i] + nums[j] == target) return { i, j };
         }
     }
 
     // "You may assume that each input would have exactly one solution"
     assert(false);
 }
+
 #endif //SOLUTION_NAIVE
 
 #ifdef SOLUTION_HASHMAP
+
 vector<int> Solution::twoSum(vector<int> &nums, int target) {
     // Assert leetcode constraints
     assert(2 <= nums.size() && nums.size() <= 10e4);
@@ -83,17 +86,18 @@ vector<int> Solution::twoSum(vector<int> &nums, int target) {
     assert(-10e9 <= target && target <= 10e9);
 
     // O(n) hashmap solution
-    unordered_map<int, size_t> map;
-    for (size_t i = 0; i < nums.size(); ++i) {
-        int& num = nums[i];
-        auto it = map.find(target - num);
-        if (it != map.end()) return { static_cast<int>(it->second), static_cast<int>(i) };
-        map[num] = i;
+    unordered_map<int, int> map;
+    for (int i = 0; i < nums.size(); ++i) {
+        auto it = map.find(target - nums[i]);
+        if (it != map.end())
+            return { it->second, i };
+        map[nums[i]] = i;
     }
 
     // "You may assume that each input would have exactly one solution"
     assert(false);
 }
+
 #endif //SOLUTION_HASHMAP
 
 #endif //INC_01_TWO_SUM_SOLUTION_H
