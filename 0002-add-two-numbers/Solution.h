@@ -51,24 +51,24 @@ ListNode *Solution::addTwoNumbers(ListNode *l1, ListNode *l2) {
     assert(l1 != nullptr);
     assert(l2 != nullptr);
 
-    ListNode* result = nullptr;
-    ListNode* last = nullptr;
-    int carry = 0;
-    while (l1 != nullptr || l2 != nullptr || carry > 0) {
-        int val = carry + (l1 ? l1->val : 0) + (l2 ? l2->val : 0);
-        carry = 0;
-        if (val >= 10) {
-            carry = 1;
-            val -= 10;
-        }
+    int val = l1->val + l2->val;
+    int carry = val / 10;
+    val %= 10;
 
-        if (!result && !last) {
-            result = new ListNode(val);
-            last = result;
-        } else {
-            last->next = new ListNode(val);
-            last = last->next;
-        }
+    l1 = l1->next;
+    l2 = l2->next;
+
+    auto* result = new ListNode(val);
+    auto* last = result;
+
+    while (l1 != nullptr || l2 != nullptr || carry > 0) {
+        val = carry + (l1 ? l1->val : 0) + (l2 ? l2->val : 0);
+        carry = 0;
+        carry = val / 10;
+        val %= 10;
+
+        last->next = new ListNode(val);
+        last = last->next;
 
         if (l1) l1 = l1->next;
         if (l2) l2 = l2->next;
