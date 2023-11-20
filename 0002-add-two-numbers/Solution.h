@@ -51,19 +51,13 @@ ListNode *Solution::addTwoNumbers(ListNode *l1, ListNode *l2) {
     assert(l1 != nullptr);
     assert(l2 != nullptr);
 
-    int val = l1->val + l2->val;
-    int carry = val / 10;
-    val %= 10;
+    auto result = ListNode(0);
+    auto* last = &result;
 
-    l1 = l1->next;
-    l2 = l2->next;
-
-    auto* result = new ListNode(val);
-    auto* last = result;
-
+    int val;
+    int carry = 0;
     while (l1 != nullptr || l2 != nullptr || carry > 0) {
         val = carry + (l1 ? l1->val : 0) + (l2 ? l2->val : 0);
-        carry = 0;
         carry = val / 10;
         val %= 10;
 
@@ -73,7 +67,7 @@ ListNode *Solution::addTwoNumbers(ListNode *l1, ListNode *l2) {
         if (l1) l1 = l1->next;
         if (l2) l2 = l2->next;
     }
-    return result;
+    return result.next;
 }
 
 #endif //INC_0002_ADD_TWO_NUMBERS_SOLUTION_H
