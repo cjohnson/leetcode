@@ -1,93 +1,95 @@
-#include <algorithm>
-#include <cassert>
 #include <iostream>
+#include <ostream>
 #include <vector>
 
+#include "ListNode.h"
 #include "Solution.h"
 
-using namespace std;
-
-ListNode* vector_to_list(const vector<int>& vec) {
-    ListNode* result = nullptr;
-    for (auto rit = vec.rbegin(); rit != vec.rend(); ++rit) {
-        auto* temp = new ListNode(*rit, result);
-        result = temp;
+std::ostream &operator<<(std::ostream &os, const std::vector<int> &vec) {
+  os << "[ ";
+  for (size_t i = 0; i < vec.size(); ++i) {
+    if (i > 0) {
+      os << ", ";
     }
+    os << vec[i];
+  }
+  os << " ]";
+  return os;
+}
+
+ListNode *create_from_vector(const std::vector<int> &vec) {
+  ListNode result(0);
+  ListNode *ptr = &result;
+  for (const auto el : vec) {
+    ptr->next = new ListNode(el);
+    ptr = ptr->next;
+  }
+  return result.next;
+}
+
+void free_list_node(ListNode *node) {
+  if (node == nullptr) {
+    return;
+  }
+
+  free_list_node(node->next);
+  delete node;
+}
+
+std::vector<int> create_vector(const ListNode *const node) {
+  std::vector<int> result;
+  if (node == nullptr) {
     return result;
-}
+  }
 
-bool same_as_vector(ListNode* number, const vector<int>& vec) {
-    auto it = vec.begin();
-    while (it != vec.end() && number != nullptr) {
-        if (*it != number->val) return false;
-        ++it;
-        number = number->next;
-    }
-    if (it == vec.end() && number == nullptr) return true;
-    return false;
-}
+  const ListNode *ptr = node;
+  while (ptr != nullptr) {
+    result.push_back(ptr->val);
+    ptr = ptr->next;
+  }
 
-void destroy_list(ListNode* node) {
-    while (node != nullptr) {
-        auto* temp = node->next;
-        delete node;
-        node = temp;
-    }
+  return result;
 }
 
 int main() {
-    Solution solution;
+  Solution solution;
 
-    // Example 1
-    {
-        vector<int> num1_vec = { 2, 4, 3 };
-        auto* num1 = vector_to_list(num1_vec);
-        vector<int> num2_vec = { 5, 6, 4 };
-        auto* num2 = vector_to_list(num2_vec);
+  std::vector<int> a, b, actual, expected;
+  ListNode *a_l, *b_l, *actual_l;
 
-        auto* result = solution.addTwoNumbers(num1, num2);
+  a = {2, 4, 3};
+  b = {5, 6, 4};
+  a_l = create_from_vector(a);
+  b_l = create_from_vector(b);
+  actual_l = solution.addTwoNumbers(a_l, b_l);
+  actual = create_vector(actual_l);
+  expected = {7, 0, 8};
+  std::cout << "Test case 1\n";
+  std::cout << "Actual:   " << actual << "\n";
+  std::cout << "Expected: " << expected << "\n";
+  std::cout << '\n';
 
-        vector<int> correct = { 7, 0, 8 };
-        assert(same_as_vector(result, correct));
+  a = {0};
+  b = {0};
+  a_l = create_from_vector(a);
+  b_l = create_from_vector(b);
+  actual_l = solution.addTwoNumbers(a_l, b_l);
+  actual = create_vector(actual_l);
+  expected = {0};
+  std::cout << "Test case 1\n";
+  std::cout << "Actual:   " << actual << "\n";
+  std::cout << "Expected: " << expected << "\n";
+  std::cout << '\n';
 
-        destroy_list(num1);
-        destroy_list(num2);
-    }
-    std::cout << "Example 1: PASS" << std::endl;
-
-    // Example 2
-    {
-        vector<int> num1_vec = { 0 };
-        auto* num1 = vector_to_list(num1_vec);
-        vector<int> num2_vec = { 0 };
-        auto* num2 = vector_to_list(num2_vec);
-
-        auto* result = solution.addTwoNumbers(num1, num2);
-
-        vector<int> correct = { 0 };
-        assert(same_as_vector(result, correct));
-
-        destroy_list(num1);
-        destroy_list(num2);
-    }
-    std::cout << "Example 2: PASS" << std::endl;
-
-    // Example 3
-    {
-        vector<int> num1_vec = { 9, 9, 9, 9, 9, 9, 9 };
-        auto* num1 = vector_to_list(num1_vec);
-        vector<int> num2_vec = { 9, 9, 9, 9 };
-        auto* num2 = vector_to_list(num2_vec);
-
-        auto* result = solution.addTwoNumbers(num1, num2);
-
-        vector<int> correct = { 8, 9, 9, 9, 0, 0, 0, 1 };
-        assert(same_as_vector(result, correct));
-
-        destroy_list(num1);
-        destroy_list(num2);
-    }
-    std::cout << "Example 3: PASS" << std::endl;
-
-    return 0;
+  a = {9, 9, 9, 9, 9, 9, 9};
+  b = {9, 9, 9, 9};
+  a_l = create_from_vector(a);
+  b_l = create_from_vector(b);
+  actual_l = solution.addTwoNumbers(a_l, b_l);
+  actual = create_vector(actual_l);
+  expected = {8, 9, 9, 9, 0, 0, 0, 1};
+  std::cout << "Test case 1\n";
+  std::cout << "Actual:   " << actual << "\n";
+  std::cout << "Expected: " << expected << "\n";
+  std::cout << '\n';
 }
