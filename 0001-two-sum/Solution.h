@@ -47,9 +47,9 @@ inline std::vector<int> Solution::twoSum(std::vector<int> &nums, int target) {
   map.reserve(nums.size());
 
   for (int i = 0; i < nums.size(); ++i) {
-    const int num = nums[i];
-    assert(-pow(10, 9) <= num && num <= pow(10, 9));
+    assert(-pow(10, 9) <= nums[i] && nums[i] <= pow(10, 9));
 
+    const int num = nums[i];
     const auto it = map.find(target - num);
     if (it != map.end()) {
       return {i, it->second};
