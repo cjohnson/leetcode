@@ -76,7 +76,7 @@ int main() {
   actual_l = solution.addTwoNumbers(a_l, b_l);
   actual = create_vector(actual_l);
   expected = {0};
-  std::cout << "Test case 1\n";
+  std::cout << "Test case 2\n";
   std::cout << "Actual:   " << actual << "\n";
   std::cout << "Expected: " << expected << "\n";
   std::cout << '\n';
@@ -88,7 +88,7 @@ int main() {
   actual_l = solution.addTwoNumbers(a_l, b_l);
   actual = create_vector(actual_l);
   expected = {8, 9, 9, 9, 0, 0, 0, 1};
-  std::cout << "Test case 1\n";
+  std::cout << "Test case 3\n";
   std::cout << "Actual:   " << actual << "\n";
   std::cout << "Expected: " << expected << "\n";
   std::cout << '\n';

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cassert>
+#include <cstddef>
 
 #include "ListNode.h"
 
@@ -30,6 +31,26 @@ private:
 inline ListNode *Solution::addTwoNumbers(ListNode *l1, ListNode *l2) {
   assert(l1 != nullptr);
   assert(l2 != nullptr);
+#ifdef DEBUG
+  ListNode *dl1 = l1;
+  ListNode *dl2 = l2;
+  size_t l1_count = 0;
+  size_t l2_count = 0;
+  while (dl1 != nullptr) {
+    ++l1_count;
+    assert(0 <= dl1->val && dl1->val <= 9);
+
+    dl1 = dl1->next;
+  }
+  while (dl2 != nullptr) {
+    ++l2_count;
+    assert(0 <= dl2->val && dl2->val <= 9);
+
+    dl2 = dl2->next;
+  }
+  assert(1 <= l1_count && l1_count <= 100);
+  assert(1 <= l2_count && l2_count <= 100);
+#endif // DEBUG
 
   return addTwoNumbers(l1, l2, 0);
 }
@@ -61,6 +82,26 @@ inline ListNode *Solution::addTwoNumbers(ListNode *l1, ListNode *l2, int carry) 
 inline ListNode *Solution::addTwoNumbers(ListNode *l1, ListNode *l2) {
   assert(l1 != nullptr);
   assert(l2 != nullptr);
+#ifdef DEBUG
+  ListNode *dl1 = l1;
+  ListNode *dl2 = l2;
+  size_t l1_count = 0;
+  size_t l2_count = 0;
+  while (dl1 != nullptr) {
+    ++l1_count;
+    assert(0 <= dl1->val && dl1->val <= 9);
+
+    dl1 = dl1->next;
+  }
+  while (dl2 != nullptr) {
+    ++l2_count;
+    assert(0 <= dl2->val && dl2->val <= 9);
+
+    dl2 = dl2->next;
+  }
+  assert(1 <= l1_count && l1_count <= 100);
+  assert(1 <= l2_count && l2_count <= 100);
+#endif // DEBUG
 
   ListNode result(0);
   ListNode *ptr = &result;
