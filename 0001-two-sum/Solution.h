@@ -19,6 +19,7 @@ inline std::vector<int> Solution::twoSum(std::vector<int> &nums, int target) {
 
   for (int i = 0; i < nums.size(); ++i) {
     for (int j = 0; j < nums.size(); ++j) {
+      assert(-pow(10, 9) <= nums[i] && nums[i] <= pow(10, 9));
       assert(-pow(10, 9) <= nums[j] && nums[j] <= pow(10, 9));
 
       if (i == j) {
