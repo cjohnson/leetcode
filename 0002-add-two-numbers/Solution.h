@@ -4,7 +4,8 @@
 
 #include "ListNode.h"
 
-#define RECURSIVE
+// #define RECURSIVE
+#define ITERATIVE
 
 class Solution {
 public:
@@ -55,3 +56,34 @@ inline ListNode *Solution::addTwoNumbers(ListNode *l1, ListNode *l2, int carry) 
   return new ListNode(val, addTwoNumbers(nl1, nl2, nextCarry));
 }
 #endif // RECURSIVE
+
+#ifdef ITERATIVE
+inline ListNode *Solution::addTwoNumbers(ListNode *l1, ListNode *l2) {
+  assert(l1 != nullptr);
+  assert(l2 != nullptr);
+
+  ListNode result(0);
+  ListNode *ptr = &result;
+  int carry = 0;
+  int val = 0;
+
+  while (l1 != nullptr || l2 != nullptr || carry != 0) {
+    val = carry;
+    if (l1 != nullptr) {
+      val += l1->val;
+      l1 = l1->next;
+    }
+    if (l2 != nullptr) {
+      val += l2->val;
+      l2 = l2->next;
+    }
+
+    carry = val / 10;
+    val %= 10;
+
+    ptr->next = new ListNode(val);
+    ptr = ptr->next;
+  }
+  return result.next;
+}
+#endif // ITERATIVE
