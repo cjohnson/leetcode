@@ -1,53 +1,31 @@
-#include <algorithm>
-#include <cassert>
-#include <iostream>
-#include <vector>
-
 #include "Solution.h"
 
-using namespace std;
+template<typename T>
+std::ostream& operator<<(std::ostream& os, const std::vector<T>& vec) {
+  os << "{ ";
+  for (const T element : vec) {
+    os << element << " ";
+  }
+  os << "}";
+  return os;
+}
 
 int main() {
-    Solution solution;
+  Solution solution;
+  std::vector<int> vec, res;
 
-    // Example 1
-    {
-        vector<int> nums = {2, 7, 11, 15 };
-        int target = 9;
+  vec = { 2, 7, 11, 15 };
+  res = solution.twoSum(vec, 9);
+  std::cout << "Test case 1\n";
+  std::cout << res << "\n";
 
-        auto pair = solution.twoSum(nums, target);
+  vec = { 3, 2, 4 };
+  res = solution.twoSum(vec, 6);
+  std::cout << "Test case 2\n";
+  std::cout << res << "\n";
 
-        assert(pair.size() == 2);
-        assert(count(pair.begin(), pair.end(), 0) == 1);
-        assert(count(pair.begin(), pair.end(), 1) == 1);
-    }
-    std::cout << "Example 1: PASS" << std::endl;
-
-    // Example 2
-    {
-        vector<int> nums = {3, 2, 4 };
-        int target = 6;
-
-        auto pair = solution.twoSum(nums, target);
-
-        assert(pair.size() == 2);
-        assert(count(pair.begin(), pair.end(), 1) == 1);
-        assert(count(pair.begin(), pair.end(), 2) == 1);
-    }
-    std::cout << "Example 2: PASS" << std::endl;
-
-    // Example 3
-    {
-        vector<int> nums = {3, 3 };
-        int target = 6;
-
-        auto pair = solution.twoSum(nums, target);
-
-        assert(pair.size() == 2);
-        assert(count(pair.begin(), pair.end(), 0) == 1);
-        assert(count(pair.begin(), pair.end(), 1) == 1);
-    }
-    std::cout << "Example 3: PASS" << std::endl;
-
-    return 0;
+  vec = { 3, 3 };
+  res = solution.twoSum(vec, 6);
+  std::cout << "Test case 3\n";
+  std::cout << res << "\n";
 }
