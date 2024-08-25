@@ -6,6 +6,7 @@
 
 class Solution {
 public:
+  // https://leetcode.com/problems/longest-palindromic-substring/description/
   std::string longestPalindrome(std::string string);
 };
 

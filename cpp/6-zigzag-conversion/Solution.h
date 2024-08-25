@@ -6,6 +6,7 @@
 
 class Solution {
 public:
+  // https://leetcode.com/problems/zigzag-conversion/description/
   std::string convert(std::string string, int num_rows);
 };
 
