@@ -1,9 +1,13 @@
+#include <cassert>
+
 class Solution {
 public:
     bool isPalindrome(int x);
 };
 
 inline bool Solution::isPalindrome(const int x) {
+  assert(-2e31 <= x && x <= (2e31 - 1));
+
   if (x == 0) return true;
   if (x < 0)  return false;
 
